@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+langchain
+langchain-experimental
+langchain-groq
+langchain-community
+pandas
+matplotlib
+seaborn
+python-dotenv
+pydantic
