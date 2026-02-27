@@ -8,7 +8,7 @@ from PIL import Image, UnidentifiedImageError
 try:
     BACKEND_URL = st.secrets["BACKEND_URL"]
 except Exception:
-    BACKEND_URL = os.getenv("BACKEND_URL","https://shanmukharaghavendrar-titanic-chat-agent.hf.space/chat")
+    BACKEND_URL = os.getenv("BACKEND_URL","")
 
 st.set_page_config(page_title="Titanic Chatbot 🚢", layout="centered")
 st.title("🚢 Titanic Dataset Chatbot")
