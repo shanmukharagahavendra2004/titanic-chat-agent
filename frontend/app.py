@@ -4,11 +4,11 @@ import requests
 import base64
 import io
 from PIL import Image, UnidentifiedImageError
-from dotenv import load_dotenv
 
-load_dotenv()
-
-BACKEND_URL = os.getenv("BACKEND_URL", "http://127.0.0.1:8000/chat")
+try:
+    BACKEND_URL = st.secrets["BACKEND_URL"]
+except Exception:
+    BACKEND_URL = os.getenv("BACKEND_URL","https://shanmukharaghavendrar-titanic-chat-agent.hf.space/chat")
 
 st.set_page_config(page_title="Titanic Chatbot 🚢", layout="centered")
 st.title("🚢 Titanic Dataset Chatbot")
@@ -39,7 +39,7 @@ for message in st.session_state.messages:
         if message.get("chart"):
             img = decode_chart(message["chart"])
             if img:
-                st.image(img, use_container_width=True)
+                st.image(img, width="stretch")
 
 
 if prompt := st.chat_input("Ask a question about Titanic dataset..."):
@@ -70,7 +70,7 @@ if prompt := st.chat_input("Ask a question about Titanic dataset..."):
                     bot_reply = f"⚠️ {data.get('error', 'Unknown error from server.')}"
 
             except requests.exceptions.ConnectionError:
-                bot_reply = "❌ Cannot connect to the backend. Make sure the FastAPI server is running on port 8000."
+                bot_reply = "❌ Cannot connect to the backend. Make sure the FastAPI server is running."
             except requests.exceptions.Timeout:
                 bot_reply = "⏱️ The request timed out. The server is taking too long to respond. Please try again."
             except requests.exceptions.HTTPError as e:
@@ -91,4 +91,4 @@ if prompt := st.chat_input("Ask a question about Titanic dataset..."):
             if chart_base64:
                 img = decode_chart(chart_base64)
                 if img:
-                    st.image(img, use_container_width=True)
+                    st.image(img, width="stretch")
