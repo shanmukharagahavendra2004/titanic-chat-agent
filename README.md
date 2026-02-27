@@ -182,7 +182,3 @@ Available Groq models:
 | `mixtral-8x7b-32768` | Medium | Very Good |
 
 ---
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
